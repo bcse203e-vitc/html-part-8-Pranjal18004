@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <body>
+
+        <h1>Countdown Timer</h1>
+        <input type="number" id="timeInput" placeholder="Seconds">
+        <div>
+            <button class="btn start" onclick="startCountdown()">Start</button>
+            <button class="btn reset" onclick="resetCountdown()">Reset</button>
+        </div>
+        <p class="timer" id="timerDisplay">00:00</p>
+    
+        <script>
+            let countdown;
+            
+            function startCountdown() {
+                let seconds = parseInt(document.getElementById("timeInput").value);
+                if (isNaN(seconds) || seconds <= 0) {
+                    alert("Please enter a valid number!");
+                    return;
+                }
+                
+                clearInterval(countdown); 
+                updateDisplay(seconds);
+    
+                countdown = setInterval(() => {
+                    seconds--;
+                    updateDisplay(seconds);
+                    
+                    if (seconds <= 0) {
+                        clearInterval(countdown);
+                        document.getElementById("timerDisplay").innerText = "Time's Up! ⏳";
+                    }
+                }, 1000);
+            }
+    
+            function updateDisplay(seconds) {
+                let min = String(Math.floor(seconds / 60)).padStart(2, '0');
+                let sec = String(seconds % 60).padStart(2, '0');
+                document.getElementById("timerDisplay").innerText = `${min}:${sec}`;
+            }
+    
+            function resetCountdown() {
+                clearInterval(countdown);
+                document.getElementById("timerDisplay").innerText = "00:00";
+                document.getElementById("timeInput").value = "";
+            }
+        </script>
+</body>
+</html>

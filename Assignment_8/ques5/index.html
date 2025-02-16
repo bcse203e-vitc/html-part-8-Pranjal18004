@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <textarea id="textArea" placeholder="Start typing..."></textarea>
+        <p class="counter">Word Count: <span id="wordCount">0</span></p>
+        <p><strong>Repeated Words:</strong> <span id="repeatedWords"></span></p>
+    </div>
+
+    <script>
+        document.getElementById("textArea").addEventListener("input", function() {
+            let text = this.value.trim();
+            let words = text.split(/\s+/).filter(word => word.length > 0);
+            document.getElementById("wordCount").innerText = words.length;
+            let wordMap = {};
+            let repeated = new Set();
+            words.forEach(word => {
+                let lowerWord = word.toLowerCase();
+                wordMap[lowerWord] = (wordMap[lowerWord] || 0) + 1;
+                if (wordMap[lowerWord] > 1) {
+                    repeated.add(lowerWord);
+                }
+            });
+            document.getElementById("repeatedWords").innerText = repeated.size > 0 ? [...repeated].join(", ") : "None";
+        });
+    </script>
+
+</body>
+</html>

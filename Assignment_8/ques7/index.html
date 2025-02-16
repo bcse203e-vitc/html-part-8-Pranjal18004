@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="display">Press any key...</div>
+
+    <script>
+        document.addEventListener("keydown", function(event) {
+            let key = event.key === " " ? "Space" : event.key; 
+            document.querySelector(".display").innerHTML = `You pressed: <span class="key">${key}</span>`;
+        });
+    </script>
+</body>
+</html>

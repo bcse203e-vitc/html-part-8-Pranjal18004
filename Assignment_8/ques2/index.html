@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h2>Sign-Up Form</h2>
+    <form id="signupForm">
+        <input type="text" id="name" placeholder="Name" oninput="validateName()">
+        <div class="error" id="nameError"></div>
+        
+        <input type="email" id="email" placeholder="Email" oninput="validateEmail()">
+        <div class="error" id="emailError"></div>
+        
+        <input type="password" id="password" placeholder="Password" oninput="validatePassword()">
+        <div class="error" id="passwordError"></div>
+        
+        <button type="submit">Sign Up</button>
+    </form>
+    
+    <script>
+        function validateName() {
+            const name = document.getElementById("name");
+            const error = document.getElementById("nameError");
+            if (name.value.trim() === "") {
+                error.textContent = "Name must not be empty.";
+                name.classList.add("invalid");
+                name.classList.remove("valid");
+            } else {
+                error.textContent = "";
+                name.classList.add("valid");
+                name.classList.remove("invalid");
+            }
+        }
+        
+        function validateEmail() {
+            const email = document.getElementById("email");
+            const error = document.getElementById("emailError");
+            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!regex.test(email.value)) {
+                error.textContent = "Enter a valid email.";
+                email.classList.add("invalid");
+                email.classList.remove("valid");
+            } else {
+                error.textContent = "";
+                email.classList.add("valid");
+                email.classList.remove("invalid");
+            }
+        }
+        
+        function validatePassword() {
+            const password = document.getElementById("password");
+            const error = document.getElementById("passwordError");
+            const regex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
+            if (!regex.test(password.value)) {
+                error.textContent = "Password must be at least 8 characters with 1 uppercase & 1 number.";
+                password.classList.add("invalid");
+                password.classList.remove("valid");
+            } else {
+                error.textContent = "";
+                password.classList.add("valid");
+                password.classList.remove("invalid");
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: #222;
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+.controls {
+    margin-top: 20px;
+}
+.btn {
+    font-size: 18px;
+    padding: 10px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+}
+.increase {
+    background: limegreen;
+}
+.increase:hover {
+    background: green;
+}
+.decrease {
+    background: crimson;
+}
+.decrease:hover {
+    background: red;
+}
+p {
+    font-size: 20px;
+    margin-top: 20px;
+}

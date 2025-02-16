@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h2>Dynamic Table Creator</h2>
+    <label>Rows: <input type="number" id="rows" min="1" value="3"></label>
+    <label>Columns: <input type="number" id="cols" min="1" value="3"></label>
+    <button onclick="generateTable()">Generate Table</button>
+    <div id="tableContainer"></div>
+    
+    <script>
+        function generateTable() {
+            const rows = document.getElementById("rows").value;
+            const cols = document.getElementById("cols").value;
+            const container = document.getElementById("tableContainer");
+            
+            container.innerHTML = ""; // Clear existing table
+            
+            let table = document.createElement("table");
+            
+            for (let i = 0; i < rows; i++) {
+                let tr = document.createElement("tr");
+                for (let j = 0; j < cols; j++) {
+                    let td = document.createElement("td");
+                    td.textContent = `Row ${i+1}, Col ${j+1}`;
+                    tr.appendChild(td);
+                }
+                let delRowBtn = document.createElement("button");
+                delRowBtn.textContent = "Delete Row";
+                delRowBtn.className = "delete-btn";
+                delRowBtn.onclick = () => tr.remove();
+                let td = document.createElement("td");
+                td.appendChild(delRowBtn);
+                tr.appendChild(td);
+                table.appendChild(tr);
+            }
+            
+            let tr = document.createElement("tr");
+            for (let j = 0; j < cols; j++) {
+                let delColBtn = document.createElement("button");
+                delColBtn.textContent = "Delete Col";
+                delColBtn.className = "delete-btn";
+                delColBtn.onclick = () => deleteColumn(j);
+                let th = document.createElement("th");
+                th.appendChild(delColBtn);
+                tr.appendChild(th);
+            }
+            table.insertBefore(tr, table.firstChild);
+            
+            container.appendChild(table);
+        }
+        
+        function deleteColumn(index) {
+            const table = document.querySelector("table");
+            for (let row of table.rows) {
+                if (row.cells[index]) {
+                    row.deleteCell(index);
+                }
+            }
+        }
+    </script>
+</body>
+</html>
